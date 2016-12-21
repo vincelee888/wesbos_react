@@ -16,6 +16,7 @@ class StorePicker extends React.Component {
   goToStore (e) {
     e.preventDefault()
     console.log(this.storeId.value) // this.storeId is the input element
+    this.context.router.transitionTo(`/store/${this.storeId.value}/`)
   } 
 
   render () {
@@ -27,6 +28,10 @@ class StorePicker extends React.Component {
       </form>
     ) // jsx alternative to React.createElement('p', blah blah blah)
   }
+}
+
+StorePicker.contextTypes = {
+  router: React.PropTypes.object // pull in router from ancestor component
 }
 
 export default StorePicker

@@ -8,7 +8,7 @@ class App extends React.Component {
     return (
       <div className="catch-of-the-day">
         <div className="menu">
-          <Header />
+          <Header tagline="Fresh seafood market" /> { /* pass properties to component */ }
         </div>
         <Order />
         <Inventory />

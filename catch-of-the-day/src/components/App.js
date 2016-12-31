@@ -11,10 +11,11 @@ class App extends React.Component {
 
     this.addFish = this.addFish.bind(this)
     this.loadSamples = this.loadSamples.bind(this)
+    this.addToOrder = this.addToOrder.bind(this)
 
     this.state = {
       fishes: {},
-      orders: {}
+      order: {}
     }
   }
 
@@ -32,6 +33,14 @@ class App extends React.Component {
     })
   }
 
+  addToOrder(fish) {
+    const updatedOrder = {...this.state.order} // copy current state (for perf/race-condition avoidance)
+    updatedOrder[fish] = updatedOrder[fish] + 1 || 1
+    this.setState({ 
+      order: updatedOrder
+    })
+  }
+
   render() {
     return (
       <div className="catch-of-the-day">
@@ -40,7 +49,7 @@ class App extends React.Component {
           <ul className="list-of-fish">
           {
             Object.keys(this.state.fishes)
-              .map((f) => <Fish key={f} details={this.state.fishes[f]} />)
+              .map((f) => <Fish key={f} index={f} details={this.state.fishes[f]} addToOrder={this.addToOrder} />) // key is a React reserved word, have to pass another prop for id
           }
           </ul>
         </div>

@@ -6,7 +6,7 @@ class Inventory extends React.Component {
     return (
       <section>
         <header>Inventory</header>
-        <AddFishForm />
+        <AddFishForm addFish={this.props.addFish} />
       </section>
     )
   }

@@ -3,7 +3,8 @@ import Header from './Header'
 import Order from './Order'
 import Fish from './Fish'
 import Inventory from './Inventory'
-import SampleFishes from '../sample-fishes'
+import sampleFishes from '../sample-fishes'
+import base from '../base'
 
 class App extends React.Component {
   constructor() {
@@ -19,6 +20,18 @@ class App extends React.Component {
     }
   }
 
+  componentWillMount() { // component hook
+    const storeId = this.props.params.storeId
+    this.ref = base.syncState(`${storeId}/fishes`, {
+      context: this,
+      state: 'fishes'
+    })
+  }
+
+  componentWillUnmount() {
+    base.removeBinding(this.ref)
+  }
+
   addFish(newFish) {
     const updatedFishes = {...this.state.fishes} // copy current state (for perf/race-condition avoidance)
     updatedFishes[`fish-${Date.now()}`] = newFish
@@ -29,7 +42,7 @@ class App extends React.Component {
 
   loadSamples() {
     this.setState({
-      fishes: SampleFishes
+      fishes: sampleFishes
     })
   }
 

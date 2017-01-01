@@ -28,8 +28,6 @@ class App extends React.Component {
       state: 'fishes'
     })
 
-    console.log(this.state.fishes)
-
     const localStorageRef = localStorage.getItem(`order-${storeId}`)
     if (localStorageRef) {
       this.setState({

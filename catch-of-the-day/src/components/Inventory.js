@@ -14,7 +14,6 @@ class Inventory extends React.Component {
       ...fish, 
       [e.target.name]: e.target.value
     }
-    console.log(updatedFish)
     this.props.updateFish(key, updatedFish)
   }
 
@@ -23,13 +22,13 @@ class Inventory extends React.Component {
     return (
       <div key={key} className="fish-edit" onSubmit={(e) => this.createFish(e)}>
         <input name="name" defaultValue={fish.name} type="text" placeholder="Name" onChange={(e) => this.handleChange(e, key)} />
-        <input name="price" defaultValue={fish.price} type="text" placeholder="Price" />
-        <select name="status" defaultValue={fish.status}>
+        <input name="price" defaultValue={fish.price} type="text" placeholder="Price" onChange={(e) => this.handleChange(e, key)} />
+        <select name="status" defaultValue={fish.status} onChange={(e) => this.handleChange(e, key)}>
           <option value="available">Fresh!</option>
           <option value="unavailable">Sold Out</option>
         </select>
-        <textarea name="desc" defaultValue={fish.desc} type="text" placeholder="Desc"></textarea>
-        <input name="image" defaultValue={fish.image} type="text" placeholder="Image" />
+        <textarea name="desc" defaultValue={fish.desc} type="text" placeholder="Desc" onChange={(e) => this.handleChange(e, key)}></textarea>
+        <input name="image" defaultValue={fish.image} type="text" placeholder="Image" onChange={(e) => this.handleChange(e, key)} />
       </div>
     )  
   }

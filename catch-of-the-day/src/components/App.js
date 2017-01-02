@@ -68,6 +68,11 @@ class App extends React.Component {
     this.setState({ 
       fishes
     })
+    const updatedOrder = {...this.state.order} // copy current state (for perf/race-condition avoidance)
+    delete updatedOrder[key]
+    this.setState({ 
+      order: updatedOrder
+    })
   }
 
   loadSamples() {

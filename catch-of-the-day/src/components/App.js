@@ -62,7 +62,7 @@ class App extends React.Component {
     })
   }
 
-  removeFish(e, key) {
+  removeFish(key) {
     const fishes = {...this.state.fishes} // copy current state (for perf/race-condition avoidance)
     fishes[key] = null // set it null due to Firebase, instead of delete fishes[key]
     this.setState({ 

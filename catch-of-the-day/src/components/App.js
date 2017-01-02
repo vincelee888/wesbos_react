@@ -12,6 +12,7 @@ class App extends React.Component {
 
     this.addFish = this.addFish.bind(this)
     this.updateFish = this.updateFish.bind(this)
+    this.removeFish = this.removeFish.bind(this)
     this.loadSamples = this.loadSamples.bind(this)
     this.addToOrder = this.addToOrder.bind(this)
 
@@ -61,6 +62,14 @@ class App extends React.Component {
     })
   }
 
+  removeFish(e, key) {
+    const fishes = {...this.state.fishes} // copy current state (for perf/race-condition avoidance)
+    fishes[key] = null // set it null due to Firebase, instead of delete fishes[key]
+    this.setState({ 
+      fishes
+    })
+  }
+
   loadSamples() {
     this.setState({
       fishes: sampleFishes
@@ -88,7 +97,7 @@ class App extends React.Component {
           </ul>
         </div>
         <Order fishes={this.state.fishes} order={this.state.order} params={this.props.params} />
-        <Inventory fishes={this.state.fishes} addFish={this.addFish} updateFish={this.updateFish} loadSamples={this.loadSamples} />
+        <Inventory fishes={this.state.fishes} addFish={this.addFish} updateFish={this.updateFish} removeFish={this.removeFish} loadSamples={this.loadSamples} />
       </div>
     )
   }

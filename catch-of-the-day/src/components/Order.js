@@ -4,21 +4,24 @@ import { formatPrice } from '../helpers'
 class Order extends React.Component {
   constructor() {
     super()
-    this.renderOrderItem = this.renderOrderItem.bind(this)
+    this.renderOrderItems = this.renderOrderItems.bind(this)
   }
 
-  renderOrderItem(key) {
+  renderOrderItems(key) {
     const fish = this.props.fishes[key]
     const count = this.props.order[key]
+    const removeBtn = <button onClick={() => this.props.removeFromOrder(key)}>Remove</button>
 
     if (!fish || fish.status === 'unavailable') {
-      return <li key={key}>Sorry, not available</li>
+      return (
+        <li key={key}>Sorry, not available {removeBtn}</li>
+      )
     }else {
       return (
       <li key={key}>
         <span>{count}lbs of {fish.name}</span>
         <span className="price">{formatPrice(count * fish.price)}</span>
-        <button onClick={() => this.props.removeFromOrder(key)}>Remove</button>
+        {removeBtn}
       </li>
       )
     }
@@ -39,7 +42,7 @@ class Order extends React.Component {
       <div className="order-wrap">
         <h2>Your Order</h2>
         <ul className="order">
-          {orderIds.map(this.renderOrderItem)}
+          {orderIds.map(this.renderOrderItems)}
           <li className="total">
             Total: {formatPrice(total)}
           </li>
